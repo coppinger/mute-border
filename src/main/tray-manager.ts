@@ -85,6 +85,15 @@ export class TrayManager {
     const menu = Menu.buildFromTemplate([
       { label: statusLabel, enabled: false },
       { type: 'separator' },
+      {
+        label: 'Launch at Login',
+        type: 'checkbox',
+        checked: app.getLoginItemSettings().openAtLogin,
+        click: (menuItem) => {
+          app.setLoginItemSettings({ openAtLogin: menuItem.checked });
+        },
+      },
+      { type: 'separator' },
       { label: 'Quit', click: () => app.quit() },
     ]);
 
