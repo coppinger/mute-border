@@ -35,6 +35,10 @@ export class WaveLinkClient extends EventEmitter {
     ws.on('message', (data: WebSocket.RawData) => {
       try {
         const msg = JSON.parse(data.toString());
+        // Log all non-RPC-response messages (server-push events)
+        if (msg.method) {
+          console.log('[WaveLink] Event:', msg.method, JSON.stringify(msg.params, null, 2));
+        }
         this.handleMessage(msg);
       } catch (e) {
         console.error('[WaveLink] Failed to parse message:', e);
