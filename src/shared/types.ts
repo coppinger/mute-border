@@ -1,13 +1,14 @@
-// Tuple: [isMuted, volume, fxBypassed]
-export type MixerState = [boolean, number, boolean];
+// Tuple: [isMuted, volume, fxBypassed, ...rest]
+export type MixerState = [boolean, number, boolean, ...boolean[]];
 
 export type MixerID = 'com.elgato.mix.local' | 'com.elgato.mix.stream';
 
 export interface WaveLinkInput {
   identifier: string;
   name: string;
-  inputType: number; // 1 = hardware mic, 2 = virtual input
+  inputType: number;
   isAvailable: boolean;
+  isWaveMicInput?: boolean;
   localMixer: MixerState;
   streamMixer: MixerState;
 }

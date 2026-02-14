@@ -87,7 +87,7 @@ export class WaveLinkClient extends EventEmitter {
     try {
       const inputs = await this.rpcCall<WaveLinkInput[]>('getInputConfigs');
       console.log('[WaveLink] getInputConfigs response:', JSON.stringify(inputs, null, 2));
-      const mic = inputs.find((i) => i.inputType === 1 && i.isAvailable);
+      const mic = inputs.find((i) => i.isWaveMicInput && i.isAvailable);
 
       if (!mic) {
         console.warn('[WaveLink] No available hardware mic found');
