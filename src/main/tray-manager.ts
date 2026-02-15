@@ -13,10 +13,14 @@ function createTrayIcon(iconName: string): nativeImage {
 
   if (isMac) {
     const templateName = iconName.replace('.png', 'Template.png');
-    const templateIcon = nativeImage.createFromPath(assetPath(templateName));
+    const templatePath = assetPath(templateName);
+    const templateIcon = nativeImage.createFromPath(templatePath);
     if (!templateIcon.isEmpty()) {
       return templateIcon;
     }
+    console.warn(
+      `[TrayManager] macOS template tray icon not found or empty, falling back to standard icon: ${templatePath}`,
+    );
   }
 
   return nativeImage.createFromPath(assetPath(iconName)).resize({ width: 16, height: 16 });
