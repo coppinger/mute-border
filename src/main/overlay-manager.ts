@@ -57,7 +57,7 @@ export class OverlayManager {
       skipTaskbar: true,
       focusable: false,
       hasShadow: false,
-      roundedCorners: false,
+      roundedCorners: process.platform === 'darwin' ? false : undefined,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
         contextIsolation: true,
@@ -67,7 +67,11 @@ export class OverlayManager {
 
     win.setAlwaysOnTop(true, 'screen-saver');
     win.setIgnoreMouseEvents(true);
-    win.setVisibleOnAllWorkspaces(true);
+    if (process.platform === 'darwin') {
+      win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    } else {
+      win.setVisibleOnAllWorkspaces(true);
+    }
 
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
       win.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
