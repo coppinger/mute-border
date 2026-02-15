@@ -11,13 +11,14 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     extraResource: ['assets'],
+    icon: 'assets/icon',
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({}, ['win32']),
     new MakerZIP({}, ['darwin']),
-    new MakerRpm({}),
-    new MakerDeb({}),
+    new MakerRpm({}, ['linux']),
+    new MakerDeb({}, ['linux']),
   ],
   plugins: [
     new VitePlugin({

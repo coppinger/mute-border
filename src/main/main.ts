@@ -19,6 +19,10 @@ const overlayManager = new OverlayManager();
 const trayManager = new TrayManager();
 
 app.on('ready', () => {
+  if (process.platform === 'darwin') {
+    app.dock.hide();
+  }
+
   trayManager.init();
   overlayManager.init();
 
@@ -42,10 +46,10 @@ app.on('ready', () => {
 
   waveLinkClient.connect();
 
-  // Debug shortcut: Ctrl+Shift+M to simulate mute toggle
+  // Debug shortcut: CommandOrControl+Shift+M to simulate mute toggle
   if (!app.isPackaged) {
     let debugMuted = false;
-    globalShortcut.register('Ctrl+Shift+M', () => {
+    globalShortcut.register('CommandOrControl+Shift+M', () => {
       debugMuted = !debugMuted;
       console.log(`[Debug] Simulated mute: ${debugMuted}`);
       overlayManager.sendMuteState(debugMuted);

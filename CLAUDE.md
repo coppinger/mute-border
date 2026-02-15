@@ -31,9 +31,9 @@ Electron 40 + TypeScript + Vite (via Electron Forge 7). Runtime dependency: `ws`
 
 ## Key Details
 
-- **Debug shortcut**: `Ctrl+Shift+M` simulates mute toggle (dev mode only, `!app.isPackaged`)
+- **Debug shortcut**: `CommandOrControl+Shift+M` simulates mute toggle (dev mode only, `!app.isPackaged`)
 - **Overlay windows**: frameless, transparent, `alwaysOnTop: 'screen-saver'`, `ignoreMouseEvents: true`, visible on all workspaces
-- **Forge config** (`forge.config.ts`): asar enabled, `assets/` copied as extraResource, Fuses plugin locks down Node options and cookie encryption
+- **Forge config** (`forge.config.ts`): asar enabled, `assets/` copied as extraResource, platform-scoped makers for Windows/macOS/Linux, Fuses plugin locks down Node options and cookie encryption
 - **Tray icons**: 16x16 PNGs in `assets/` (disconnected, muted, unmuted)
 - **Vite config**: `ws` and `electron` are external in main process build (`vite.main.config.ts`)
 - **On disconnect**: border hides (assumes unmuted), tray shows disconnected state, reconnect scheduled

@@ -1,6 +1,6 @@
 # Mute Border
 
-A Windows tray app that displays a glowing red border overlay on all monitors when your [Elgato Wave Link](https://www.elgato.com/us/en/s/wave-link) microphone is muted. Never forget you're muted again.
+A tray app for Windows and macOS that displays a glowing red border overlay on all monitors when your [Elgato Wave Link](https://www.elgato.com/us/en/s/wave-link) microphone is muted. Never forget you're muted again.
 
 ## How it works
 
@@ -13,18 +13,28 @@ When you unmute, the border fades out. If Wave Link closes or disconnects, the b
 
 ## Requirements
 
-- Windows (uses Squirrel installer)
+- Windows or macOS
 - [Elgato Wave Link](https://www.elgato.com/us/en/s/wave-link) running
 
 ## Install
 
-Download the latest release from [Releases](../../releases) and run the installer.
+Download the latest release from [Releases](../../releases).
+
+### Windows
+
+Run the installer.
+
+### macOS
+
+Extract the ZIP, move `mute-border.app` to `Applications`, then launch it.
+
+Because public releases are currently unsigned, macOS may block first launch. If that happens, right-click the app in Finder and choose **Open**.
 
 To launch at startup, right-click the tray icon and check **Launch at Login**.
 
 ## Building from source
 
-```
+```bash
 git clone https://github.com/coppinger/mute-border.git
 cd mute-border
 npm install
@@ -32,22 +42,30 @@ npm install
 
 Run in development:
 
-```
+```bash
 npm start
 ```
 
 Package as an installer:
 
-```
+```bash
 npm run make
 ```
 
-The installer will be in `out/make/squirrel.windows/x64/`.
+Output artifacts:
+
+- Windows installer: `out/make/squirrel.windows/x64/`
+- macOS ZIP app bundle: `out/make/zip/darwin/`
+
+In development mode, the debug mute toggle shortcut is:
+
+- Windows/Linux: `Ctrl+Shift+M`
+- macOS: `Cmd+Shift+M`
 
 ## Architecture
 
 | Module | Description |
-|---|---|
+| --- | --- |
 | `src/main/main.ts` | App entry point, wires together managers, registers debug shortcut |
 | `src/main/wave-link-client.ts` | WebSocket client for Wave Link's JSON-RPC 2.0 API |
 | `src/main/overlay-manager.ts` | Creates transparent, click-through overlay windows per display |
