@@ -45,8 +45,8 @@ export function loadConfig(): Config {
     const parsed = JSON.parse(raw) as Partial<Config>;
 
     return {
-      obs: { ...DEFAULT_CONFIG.obs, ...parsed.obs },
-      waveLink: { ...DEFAULT_CONFIG.waveLink, ...parsed.waveLink },
+      obs: { ...DEFAULT_CONFIG.obs, ...(parsed.obs ?? {}) },
+      waveLink: { ...DEFAULT_CONFIG.waveLink, ...(parsed.waveLink ?? {}) },
     };
   } catch (error) {
     console.error('[Config] Failed to load config, using defaults:', error);
