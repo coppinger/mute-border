@@ -10,7 +10,10 @@ const overlay = document.getElementById('border-overlay');
 const badge = document.getElementById('muted-badge');
 
 if (overlay && badge) {
-  const isMac = navigator.platform.toLowerCase().includes('mac');
+  const platformString =
+    ((navigator as any).userAgentData?.platform as string | undefined) ??
+    navigator.userAgent;
+  const isMac = platformString.toLowerCase().includes('mac');
   if (isMac) {
     overlay.classList.add('rounded-corners');
   }
