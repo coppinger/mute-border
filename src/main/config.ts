@@ -26,8 +26,12 @@ function ensureConfigDir(): void {
 }
 
 function createDefaultConfig(): Config {
-  ensureConfigDir();
-  writeFileSync(CONFIG_FILE, JSON.stringify(DEFAULT_CONFIG, null, 2));
+  try {
+    ensureConfigDir();
+    writeFileSync(CONFIG_FILE, JSON.stringify(DEFAULT_CONFIG, null, 2));
+  } catch (error) {
+    console.error('[Config] Failed to create default config file, using defaults in memory:', error);
+  }
   return DEFAULT_CONFIG;
 }
 
