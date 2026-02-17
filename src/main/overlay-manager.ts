@@ -67,7 +67,7 @@ export class OverlayManager {
 
     win.setAlwaysOnTop(true, 'screen-saver');
     win.setIgnoreMouseEvents(true);
-    win.setVisibleOnAllWorkspaces(true);
+    win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
 
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
       win.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
